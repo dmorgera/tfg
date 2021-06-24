@@ -1,7 +1,10 @@
 package registry
 
 import (
+	"encoding/hex"
+
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
+	solsha3 "github.com/miguelmota/go-solidity-sha3"
 )
 
 // TransactionContextInterface an interface to
@@ -10,6 +13,7 @@ import (
 type RegistryTxContextInterface interface {
 	contractapi.TransactionContextInterface
 	GetCredentialList() CredentialListInterface
+	Keccak256(input string) string
 }
 
 // TransactionContext implementation of
@@ -27,4 +31,16 @@ func (tc *RegistryTxContext) GetCredentialList() CredentialListInterface {
 	}
 
 	return tc.credentialList
+}
+
+func (tc *RegistryTxContext) Keccak256(input string) string {
+	hash := solsha3.SoliditySHA3(
+		// types
+		[]string{"string"},
+		// values
+		[]interface{}{
+			input,
+		},
+	)
+	return hex.EncodeToString(hash)
 }

@@ -37,9 +37,6 @@ func (cl *list) UpdateCredential(credential *Credential) error {
 	return cl.stateList.UpdateState(credential)
 }
 
-func (cl *list) GetCredentialList() {
-}
-
 // NewList creates a new list from context
 func newCredentialList(ctx RegistryTxContextInterface) *list {
 	stateList := new(ledgerapi.StateList)

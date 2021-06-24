@@ -1,11 +1,9 @@
 package registry
 
 import (
-	"encoding/hex"
 	"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
-	solsha3 "github.com/miguelmota/go-solidity-sha3"
 )
 
 // Contract chaincode that defines
@@ -19,7 +17,7 @@ func (c *Contract) AddSubjectCredential(ctx RegistryTxContextInterface, subjectC
 	if err != nil {
 		return err
 	}
-	credential := Credential{PSMHash: subjectCredentialHash, Status: ValidC, Type: "subject", URI: uri, SubjectID: keccak256(id)}
+	credential := Credential{PSMHash: subjectCredentialHash, Status: ValidC, Type: "subject", URI: uri, SubjectID: ctx.Keccak256(id)}
 
 	return ctx.GetCredentialList().AddCredential(&credential)
 }
@@ -29,7 +27,7 @@ func (c *Contract) AddIssuerCredential(ctx RegistryTxContextInterface, issuerCre
 	if err != nil {
 		return err
 	}
-	credential := Credential{PSMHash: issuerCredentialHash, Status: ValidC, Type: "issuer", SubjectID: keccak256(id)}
+	credential := Credential{PSMHash: issuerCredentialHash, Status: ValidC, Type: "issuer", SubjectID: ctx.Keccak256(id)}
 
 	return ctx.GetCredentialList().AddCredential(&credential)
 }
@@ -92,19 +90,29 @@ func (c *Contract) UpdateCredentialStatus(ctx RegistryTxContextInterface, issuer
 	return nil
 }
 
+// Extremely unefficient, with CouchDB this gets much better
 func (c *Contract) GetSubjectCredentialList(ctx RegistryTxContextInterface, idHash string) ([]string, error) {
-	credIterator, err := ctx.GetStub().GetStateByRange("", "")
-
-}
-
-func keccak256(input string) string {
-	hash := solsha3.SoliditySHA3(
-		// types
-		[]string{"string"},
-		// values
-		[]interface{}{
-			input,
-		},
-	)
-	return hex.EncodeToString(hash)
+	credIterator, err := ctx.GetStub().GetStateByPartialCompositeKey("org.net.credlist", []string{"subject"})
+	if err != nil {
+		return nil, err
+	}
+	defer credIterator.Close()
+	var i int
+	var credentials []string
+	for i = 0; credIterator.HasNext(); i++ {
+		responseRange, err := credIterator.Next()
+		if err != nil {
+			return nil, err
+		}
+		_, compositeKeyParts, err := ctx.GetStub().SplitCompositeKey(responseRange.Key)
+		if err != nil {
+			return nil, err
+		}
+		hash := compositeKeyParts[1]
+		c, err := ctx.GetCredentialList().GetCredential("subject", hash)
+		if c.IssuerID == idHash {
+			credentials = append(credentials, hash)
+		}
+	}
+	return credentials, nil
 }
