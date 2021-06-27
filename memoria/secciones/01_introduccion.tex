@@ -1,0 +1,50 @@
+\chapter{Introducción}
+\section{Contexto}
+
+\subsection{Alastria}
+\textit{Alastria} \cite{alastria} es una asociación sin ánimo de lucro que fomenta la economía digital a través del desarrollo de tecnologías de registro descentralizadas/Blockchain. 
+Creada en 2017 con el nombre de Red Lyra, Alastria es un consorcio que apuesta por la democratización de la blockchain en España, y por la descentralización del uso de diversos productos y servicios.
+También son los creadores de \textit{Alastria ID} \cite{alastria-id}, un modelo de identidad soberana que será una de las partes centrales de este proyecto. Alastria tiene en funcionamiento actualmente dos redes, que son la red-T y la red-B, que utilizan tecnologías \textit{Quorum} \cite{quorum} y \textit{Hyperledger Besu} \cite{besu}, respectivamente. Está en desarrolló una tercera red, la red-H, pensada para el funcionamiento con Hyperledger Fabric.
+
+\subsection{Identidad soberana}
+Para entender como funciona Alastria ID, hay que entender primero que es un modelo de identidad soberana \cite{ssi}\cite{multi-ssi}.
+Identidad soberana es un término que se utiliza para denominar al movimiento digital que defiende que un sujeto debería poder controlar y manejar sus datos y su identidad sin necesidad de una autoridad administrativa que los gestione, y su objetivo principal es lograr que la interacción en el mundo digital sea tan confiable y segura como fuera de el.
+
+En el mundo offline, toda entidad, ya sean personas físicas o empresas, interactúa con otras entidades mediante el uso de credenciales, representadas por medios físicos (carnet de identidad, permiso de conducción, etc...), y representan datos personales o información sobre la persona en cuestión.
+
+Con los modelos de identidad soberana, esta información se almacena de forma digital en forma de credenciales que se almacenan en una cartera digital o \textit{wallet} controlado por el usuario. De esta forma, no hay mas necesidad de servicios de terceros para almacenar y utilizar datos personales.
+
+El concepto de identidad soberana se remonta a los orígenes del propio internet, y ha sido iterado en múltiples ocasiones por diferentes personas. Con estas ideas, se crearon diez principios básicos para asegurar la eficacia de la identidad soberana \cite{path-to-ssi}:
+\begin{enumerate}
+    \item \textbf{Existencia:} Los usuarios deben tener una existencia independiente.
+    \item \textbf{Control:} Los usuarios deben poder controlar sus identidades.
+    \item \textbf{Acceso:} Los usuarios deben tener acceso a sus propios datos.
+    \item \textbf{Transparencia:} Los sistemas y los algoritmos deben ser transparentes.
+    \item \textbf{Persistencia:} Las identidades deben durar mucho, o hasta que el usuario desee.
+    \item \textbf{Portabilidad:} Las identidades deben ser transportables.
+    \item \textbf{Interoperabilidad:} Las identidades se deben poder usar en el mayor número de servicios posible.
+    \item \textbf{Consentimiento:} Los usuarios deben permitir el uso de sus identidades.
+    \item \textbf{Minimización:} Solo debe compartirse lo mínimo necesario.
+    \item \textbf{Protección:} Los derechos de los usuarios deben ser la prioridad.
+\end{enumerate}
+Ésta es solo una descripción básica del concepto de identidad soberana, pero hay múltiples modelos cuyas implementaciones pueden derivar de estos términos.
+
+\section{Metodología}
+Como se ha mencionado en apartados anteriores, este proyecto consiste de dos partes, un estudio teórico y una implementación practica.
+
+\subsection{Estudio teórico}
+En primer lugar, se realizara un estudio sobre el modelo de identidad Alastria ID, además de una pequeña investigación sobre blockchain, sus tipos y una comparativa teórica.
+
+\subsection{Implementación práctica}
+En la segunda parte del proyecto, se diseñaran los chaincodes de \textit{Hyperledger Fabric} \cite{fabric} en base a los smart contracts de Alastria ID, buscando un funcionamiento idéntico o similar, para luego implementarlos en una red Fabric. Se realizará una implementación parcial.
+
+\section{Objetivos}
+A lo largo del desarrollo del proyecto, se intentará cumplir con ciertos objetivos teóricos y prácticos:
+
+\begin{itemize}
+  \item Estudio del modelo de identidad Alastria ID.
+  \item Aprendizaje sobre tecnologías Blockchain como Hyperledger Fabric.
+  \item Aprendizaje sobre el lenguaje de programación Go.
+  \item Implementación de smart contracts de Alastria ID en Hyperledger Fabric.
+  \item Implementación del chaincode en una red Fabric.
+\end{itemize}

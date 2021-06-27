@@ -1,0 +1,46 @@
+\input{include/preambulo}
+\input{include/acronimos}
+\input{include/datos}
+
+
+\begin{document}
+\input{include/portada}
+%%-----------------------------------------------
+%% Numeración romana:
+\frontmatter
+%%-----------------------------------------------
+\input{secciones/00_Resumen}
+\tableofcontents
+\listoffigures
+\printglossary[type=\acronymtype]
+
+%%-----------------------------------------------
+%% Numeración arábiga:
+\mainmatter
+%%----------------------------------------------- 
+\input{secciones/01_Introduccion}
+
+\input{secciones/02_Estado-del-arte}
+
+\input{secciones/03_Comparativa-Quorum-Fabric}
+
+\input{secciones/04_Alastria-ID}
+
+\input{secciones/05_Implementacion-Fabric}
+
+\input{secciones/06_AnalisisImpacto}
+
+\input{secciones/07_Resultados}
+
+%%-----------------------------------------------
+%% Anexos
+\appendix
+\clearpage 
+%%---------------------------------------------------------
+
+\newpage
+\addcontentsline{toc}{chapter}{Bibliografía}
+
+\printbibliography
+
+\end{document}
