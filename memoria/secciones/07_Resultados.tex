@@ -1,11 +1,11 @@
 \chapter{Resultados y conclusiones}
-\section{Resultados y lineas futuras}
+\section{Resultados y líneas futuras}
 Tras la realización de este trabajo, se ha diseñado un chaincode para Alastria ID que implementa parcialmente su funcionalidad, debido a ciertos problemas que surgen debido a las características de la red. Sin embargo, con más investigación es muy probable que se puedan solucionar. Tanto las redes de Fabric como las de Quorum comparten muchas características que las hacen viables para este tipo de soluciones, y es decisión del usuario utilizar una u otra, ya que en cuanto a rendimiento son muy similares.
 
 Como trabajo futuro, hay varios puntos en los que se puede trabajar:
 \begin{itemize}
-    \item \textbf{Implementación de SC restantes:} Como se ha mencionado anteriormente, para este trabajo solo se han implementado ciertos smart contracts, así que un punto a mejorar sería terminar toda la implementación.
-    \item \textbf{Alastria Proxies:} Para solucionar la incompatibilidad de los Alastria Proxies con Fabric, se podría proponer una modificación del propio modelo para adaptarlo a la red, y quizá utilizar los certificados X.509 para crear las identidades de Alastria. Sería necesario para poder crear mas de un AlastriaID por ClientID y para poder implementar la función de recuperación de cuentas.
+    \item \textbf{Implementación de SC restantes:} Como se ha mencionado anteriormente, para este trabajo solo se han implementado ciertos smart contracts, así que un punto de continuidad sería terminar toda la implementación.
+    \item \textbf{Creación de identidades:} Debido a la incompatibilidad de los Alastria Proxies con Fabric, hay funcionalidades que no se pueden implementar con facilidad. Para ello, se podrían utilizar atributos de los certificados X.509 para crear las identidades de Alastria. Sería necesario para poder crear mas de un AlastriaID por ClientID y para poder implementar la función de recuperación de cuentas.
     \item \textbf{Cifrado mas ligero:} Una posible mejora sería utilizar una implementación mas ligera de las funciones para el cifrado Keccak256, porque actualmente se utiliza una librería mas grande de lo necesario.
     \item \textbf{Emisión de eventos:} Actualmente no está implementada la emisión de eventos, y es una parte muy importante de los contratos de Solidity, así que se podría investigar.
     \item \textbf{CouchDB:} Se podría usar CouchDB, que utiliza índices para guardar datos y que luego se puedan recuperar de forma mucho mas fácil, con consultas típicas de base de datos. Habría que cambiar configuración de la propia red para usar esta base de datos.
