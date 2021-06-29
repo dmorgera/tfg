@@ -1,5 +1,5 @@
-# Alastria ID en Hyperledger Fabric
-Este repositorio contiene mi trabajo de fin de grado para el grado de Ingeniería Informática de la Universidad Politécnica de Madrid.
+# Implementación de Alastria ID en una red blockchain Hyperledger Fabric
+Este repositorio contiene mi trabajo de fin de grado para el grado en Ingeniería Informática de la Universidad Politécnica de Madrid.
 
 ## Autor
 [Daniel Morgera Pérez](https://www.linkedin.com/in/daniel-morgera-p%C3%A9rez-61506410b/)
