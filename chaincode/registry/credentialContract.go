@@ -13,21 +13,33 @@ type Contract struct {
 }
 
 func (c *Contract) AddSubjectCredential(ctx RegistryTxContextInterface, subjectCredentialHash string, uri string) error {
+	_, err := ctx.GetCredentialList().GetCredential("subject", subjectCredentialHash)
+	if err == nil {
+		return fmt.Errorf("Error")
+	}
+
 	id, err := ctx.GetClientIdentity().GetID()
 	if err != nil {
 		return err
 	}
 	credential := Credential{PSMHash: subjectCredentialHash, Status: ValidC, Type: "subject", URI: uri, SubjectID: ctx.Keccak256(id)}
+	fmt.Printf("id: %s\n", id)
+	fmt.Printf("idhash: %s\n", credential.SubjectID)
 
 	return ctx.GetCredentialList().AddCredential(&credential)
 }
 
 func (c *Contract) AddIssuerCredential(ctx RegistryTxContextInterface, issuerCredentialHash string) error {
+	_, err := ctx.GetCredentialList().GetCredential("issuer", issuerCredentialHash)
+	if err == nil {
+		return fmt.Errorf("Error")
+	}
+
 	id, err := ctx.GetClientIdentity().GetID()
 	if err != nil {
 		return err
 	}
-	credential := Credential{PSMHash: issuerCredentialHash, Status: ValidC, Type: "issuer", SubjectID: ctx.Keccak256(id)}
+	credential := Credential{PSMHash: issuerCredentialHash, Status: ValidC, Type: "issuer", IssuerID: ctx.Keccak256(id)}
 
 	return ctx.GetCredentialList().AddCredential(&credential)
 }
@@ -110,8 +122,9 @@ func (c *Contract) GetSubjectCredentialList(ctx RegistryTxContextInterface, idHa
 		}
 		hash := compositeKeyParts[1]
 		c, err := ctx.GetCredentialList().GetCredential("subject", hash)
-		if c.IssuerID == idHash {
+		if c.SubjectID == idHash {
 			credentials = append(credentials, hash)
+			fmt.Println(hash)
 		}
 	}
 	return credentials, nil
